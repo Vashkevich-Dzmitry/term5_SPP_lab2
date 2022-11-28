@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPP_lab2", "SPP_lab2\SPP_lab2.csproj", "{AE700A1D-95BF-4EB6-87E8-9B5A7F8B2E4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPP_lab2", "SPP_lab2\SPP_lab2.csproj", "{AE700A1D-95BF-4EB6-87E8-9B5A7F8B2E4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Faker", "Faker\Faker.csproj", "{ACBA212F-66AF-4D4D-8A42-62FE38D7857A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{7EF542BC-8E81-41EC-9958-A037611BEF53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{AE700A1D-95BF-4EB6-87E8-9B5A7F8B2E4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE700A1D-95BF-4EB6-87E8-9B5A7F8B2E4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE700A1D-95BF-4EB6-87E8-9B5A7F8B2E4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACBA212F-66AF-4D4D-8A42-62FE38D7857A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACBA212F-66AF-4D4D-8A42-62FE38D7857A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACBA212F-66AF-4D4D-8A42-62FE38D7857A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACBA212F-66AF-4D4D-8A42-62FE38D7857A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EF542BC-8E81-41EC-9958-A037611BEF53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EF542BC-8E81-41EC-9958-A037611BEF53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EF542BC-8E81-41EC-9958-A037611BEF53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EF542BC-8E81-41EC-9958-A037611BEF53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
