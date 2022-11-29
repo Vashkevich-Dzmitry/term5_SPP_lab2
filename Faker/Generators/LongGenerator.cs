@@ -9,9 +9,9 @@ namespace Faker.Generators
             return new Random().NextInt64();
         }
 
-        public Type GetGeneratorType()
+        public bool CanGenerate(Type type)
         {
-            return typeof(long);
+            return type == typeof(long);
         }
     }
 }

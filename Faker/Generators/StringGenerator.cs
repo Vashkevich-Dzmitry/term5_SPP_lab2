@@ -19,9 +19,9 @@ namespace Faker.Generators
             return new string(str);
         }
 
-        public Type GetGeneratorType()
+        public bool CanGenerate(Type type)
         {
-            return typeof(string);
+            return type == typeof(string);
         }
     }
 }

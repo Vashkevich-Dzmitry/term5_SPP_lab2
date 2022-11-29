@@ -19,9 +19,9 @@ namespace Faker.Generators
             return list!;
         }
 
-        public Type GetGeneratorType()
+        public bool CanGenerate(Type type)
         {
-            return typeof(List<>);
+            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>);
         }
     }
 }

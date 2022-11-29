@@ -6,8 +6,8 @@ internal class FloatGenerator : IGenerator
         return (float)(new Random().NextDouble());
     }
 
-    public Type GetGeneratorType()
+    public bool CanGenerate(Type type)
     {
-        return typeof(float);
+        return type == typeof(float);
     }
 }

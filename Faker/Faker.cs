@@ -1,5 +1,5 @@
 ﻿using Faker.Interfaces;
-
+using System.Collections.Generic;
 namespace Faker
 {
     internal class Faker : IFaker
@@ -26,7 +26,20 @@ namespace Faker
             if (_generatorsSystem.GeneratorExists(t))
             {
                 result = _generatorsSystem.Generate(t, _context);
-            } else 
+            }
+            else
+            {
+                if (_cycleResolveService.Contains(t))
+                {
+                    result = null;
+                }
+                else
+                {
+                    _cycleResolveService.Add(t);
+                    result = null; //dodelat
+                    _cycleResolveService.Remove(t);
+                }
+            }
 
             return result;
         }

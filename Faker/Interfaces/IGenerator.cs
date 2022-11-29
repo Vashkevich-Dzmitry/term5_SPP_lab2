@@ -3,7 +3,6 @@
     public interface IGenerator
     {
         public object Generate(Type type, IGeneratorContext context);
-        public Type GetType();
-
+        public bool CanGenerate(Type type);
     }
 }

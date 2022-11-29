@@ -6,8 +6,8 @@ internal class ByteGenerator : IGenerator
         return new Random().Next(byte.MaxValue);
     }
 
-    public Type GetGeneratorType()
+    public bool CanGenerate(Type type)
     {
-        return typeof(byte);
+        return type == typeof(byte);
     }
 }

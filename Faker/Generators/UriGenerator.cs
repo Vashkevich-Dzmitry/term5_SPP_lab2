@@ -17,9 +17,9 @@ namespace Faker.Generators
             return GenerateRandomUri(context);
         }
 
-        public Type GetGeneratorType()
+        public bool CanGenerate(Type type)
         {
-            return typeof(Uri);
+            return type == typeof(Uri);
         }
 
         private Uri GenerateRandomUri(IGeneratorContext context)
