@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Faker
+namespace Faker.Generators
 {
     internal class UriGenerator : IGenerator
     {

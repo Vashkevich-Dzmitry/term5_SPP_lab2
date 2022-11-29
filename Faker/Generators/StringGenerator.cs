@@ -1,4 +1,4 @@
-﻿namespace Faker
+﻿namespace Faker.Generators
 {
     internal class StringGenerator : IGenerator
     {

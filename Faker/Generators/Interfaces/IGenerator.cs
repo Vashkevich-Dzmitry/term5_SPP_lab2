@@ -1,6 +1,6 @@
-﻿namespace Faker
+﻿namespace Faker.Generators
 {
-    internal interface IGenerator
+    public interface IGenerator
     {
         public interface IGenerator
         {
