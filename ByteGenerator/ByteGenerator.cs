@@ -1,7 +1,7 @@
-﻿using Faker.Generators;
+﻿using Faker.Interfaces;
 internal class ByteGenerator : IGenerator
 {
-    public object Generate()
+    public object Generate(Type type, IGeneratorContext context)
     {
         return new Random().Next(byte.MaxValue);
     }

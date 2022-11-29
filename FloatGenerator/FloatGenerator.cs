@@ -1,7 +1,7 @@
-﻿using Faker.Generators;
+﻿using Faker.Interfaces;
 internal class FloatGenerator : IGenerator
 {
-    public object Generate()
+    public object Generate(Type type, IGeneratorContext context)
     {
         return (float)(new Random().NextDouble());
     }

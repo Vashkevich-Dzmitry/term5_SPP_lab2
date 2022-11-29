@@ -1,14 +1,20 @@
 ﻿using System.Text;
+using Faker.Interfaces;
 
 namespace Faker.Generators
 {
     internal class UriGenerator : IGenerator
     {
-        private static readonly Random _random = new();
-        private static readonly StringGenerator _stringGenerator = new();
-        public object Generate()
+        private const int maxStringLength = 16;
+        private const int minStringLength = 4;
+        private const double fragmentGenerateProbability = 0.4;
+        private const double passwordAndUserNameGenerateProbability = 0.3;
+        private const double portGenerateProbability = 0.2;
+        private const double queryGenerateProbability = 0.6;
+
+        public object Generate(Type type, IGeneratorContext context)
         {
-            return RandomUri();
+            return GenerateRandomUri(context);
         }
 
         public Type GetGeneratorType()
@@ -16,23 +22,63 @@ namespace Faker.Generators
             return typeof(Uri);
         }
 
-        private Uri RandomUri()
+        private Uri GenerateRandomUri(IGeneratorContext context)
         {
             var uriBuilder = new UriBuilder();
+
             // fragment
-            if (_random.NextDouble() < 0.4)
+            if (context.Random.NextDouble() < fragmentGenerateProbability)
             {
-                uriBuilder.Fragment = '#' + (string)_stringGenerator.Generate();
+                uriBuilder.Fragment = GenerateRandomFragment(context);
             }
+
             // host
+            uriBuilder.Host = GenerateRandomHost(context);
+
+            // userName and password
+            if (context.Random.NextDouble() < passwordAndUserNameGenerateProbability)
+            {
+                uriBuilder.Password = GenerateRandomPassword(context);
+                uriBuilder.UserName = GenerateRandomUserName(context);
+
+            }
+
+            // scheme
+            uriBuilder.Scheme = GenerateRandomScheme(context);
+
+            // path
+            uriBuilder.Path = GenerateRandomPath(context);
+
+            // port    
+            if (context.Random.NextDouble() < portGenerateProbability)
+            {
+                uriBuilder.Port = GenerateRandomPort(context);
+            }
+
+            // query
+            if (context.Random.NextDouble() < queryGenerateProbability)
+            {
+                uriBuilder.Query = GenerateRandomQuery(context);
+            }
+
+            return uriBuilder.Uri;
+        }
+
+        private string GenerateRandomFragment(IGeneratorContext context)
+        {
+            return new string('#' + GenerateRandomString(context));
+
+        }
+        private string GenerateRandomHost(IGeneratorContext context)
+        {
             var host = new StringBuilder();
-            var subdomainCount = _random.Next(1, 4);
+            var subdomainCount = context.Random.Next(1, 4);
             for (int i = 0; i < subdomainCount; i++)
             {
-                host.Append(_stringGenerator.Generate());
+                host.Append(GenerateRandomString(context));
                 host.Append('.');
             }
-            switch (_random.NextInt64(0, 4))
+            switch (context.Random.NextInt64(0, 4))
             {
                 case 0:
                     host.Append("by");
@@ -50,51 +96,66 @@ namespace Faker.Generators
                     host.Append("org");
                     break;
             }
-            uriBuilder.Host = host.ToString();
+            return host.ToString();
+        }
+        private string GenerateRandomPassword(IGeneratorContext context)
+        {
+            return GenerateRandomString(context);
+        }
 
-            // userName and password
-            if (_random.NextDouble() < 0.4)
-            {
-                uriBuilder.Password = (string)_stringGenerator.Generate();
-                uriBuilder.UserName = (string)_stringGenerator.Generate();
-            }
+        private string GenerateRandomUserName(IGeneratorContext context)
+        {
+            return GenerateRandomString(context);
+        }
 
-            // scheme
-            uriBuilder.Scheme = _random.NextDouble() < 0.5 ? "https:" : "http:";
-
-            // path
+        private string GenerateRandomScheme(IGeneratorContext context)
+        {
+            return context.Random.NextDouble() < 0.5 ? "https:" : "http:";
+        }
+        private string GenerateRandomPath(IGeneratorContext context)
+        {
             var path = new StringBuilder();
-            var subdirCount = _random.Next(5);
+            var subdirCount = context.Random.Next(5);
             for (int i = 0; i < subdirCount; i++)
             {
                 path.Append('/');
-                path.Append(_stringGenerator.Generate());
+                path.Append(GenerateRandomString(context));
             }
-            uriBuilder.Path = path.ToString();
+            return path.ToString();
+        }
+        private int GenerateRandomPort(IGeneratorContext context)
+        {
 
-            // port    
-            if (_random.NextDouble() < 0.2)
+            return context.Random.Next(65536);
+
+        }
+        private string GenerateRandomQuery(IGeneratorContext context)
+        {
+
+            var queryCount = context.Random.Next(5);
+            var query = new StringBuilder();
+            for (int i = 0; i < queryCount; i++)
             {
-                uriBuilder.Port = _random.Next(65536);
-            }
+                _ = i > 0 ? query.Append('&') : query.Append('?');
 
-            // query
-            if (_random.NextDouble() < 0.6)
+                query.Append(GenerateRandomString(context));
+                query.Append('=');
+                query.Append(GenerateRandomString(context));
+            }
+            return query.ToString();
+
+        }
+
+        private string GenerateRandomString(IGeneratorContext context)
+        {
+            int stringLength = (int)new Random().NextInt64(minStringLength, maxStringLength);
+            char[] str = new char[stringLength];
+
+            for (int i = 0; i < stringLength; i++)
             {
-                var queryCount = _random.Next(5);
-                var query = new StringBuilder();
-                for (int i = 0; i < queryCount; i++)
-                {
-                    _ = i > 0 ? query.Append('&') : query.Append('?');
-
-                    query.Append(_stringGenerator.Generate());
-                    query.Append('=');
-                    query.Append(_stringGenerator.Generate());
-                }
-                uriBuilder.Query = query.ToString();
+                str[i] = context.ValidCharacters[new Random().Next(context.ValidCharacters.Length)];
             }
-
-            return uriBuilder.Uri;
+            return new string(str);
         }
     }
 }

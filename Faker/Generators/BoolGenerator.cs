@@ -1,8 +1,10 @@
-﻿namespace Faker.Generators
+﻿using Faker.Interfaces;
+
+namespace Faker.Generators
 {
     internal class BoolGenerator : IGenerator
     {
-        public object Generate()
+        public object Generate(Type type, IGeneratorContext context)
         {
             return new Random().NextInt64(1) == 1;
         }

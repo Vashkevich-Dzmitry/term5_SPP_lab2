@@ -1,4 +1,5 @@
-﻿using Faker.Generators;
+﻿using Faker.Interfaces;
+using Faker.Generators;
 namespace Faker
 {
     internal class GeneratorsSystem
@@ -18,9 +19,9 @@ namespace Faker
             
         }
 
-        public object Generate(Type type)
+        public object Generate(Type type, IGeneratorContext context)
         {
-            return _generators[type].Generate();
+            return _generators[type].Generate(type, context);
         }
 
         public bool GeneratorExists(Type type)

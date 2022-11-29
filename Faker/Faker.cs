@@ -1,14 +1,18 @@
-﻿namespace Faker
+﻿using Faker.Interfaces;
+
+namespace Faker
 {
-    internal class Faker
+    internal class Faker : IFaker
     {
         private readonly GeneratorsSystem _generatorsSystem;
         private readonly CycleResolveService _cycleResolveService;
+        private readonly IGeneratorContext _context;
 
         public Faker()
         {
             _generatorsSystem = new GeneratorsSystem();
             _cycleResolveService = new CycleResolveService();
+            _context = new GeneratorContext(new Random(), this);
         }
         public T Create<T>()
         {
@@ -21,7 +25,7 @@
             object result;
             if (_generatorsSystem.GeneratorExists(t))
             {
-                result = _generatorsSystem.Generate(t);
+                result = _generatorsSystem.Generate(t, _context);
             } else 
 
             return result;
