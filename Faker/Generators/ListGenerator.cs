@@ -7,14 +7,15 @@ namespace Faker.Generators
     {
         public object Generate(Type type, IGeneratorContext context)
         {
-            var argument = type.GetGenericArguments().First();
-            var generic = typeof(List<>).MakeGenericType(argument);
-            MethodInfo method = typeof(Faker).GetMethod("Create")!.MakeGenericMethod(new Type[] { argument });
-            var result = method.Invoke(context.Faker, null);
+            var genericType = type.GetGenericArguments().First();
+            var genericList = typeof(List<>).MakeGenericType(genericType);
+            MethodInfo fakerCreateMethod = typeof(Faker).GetMethod("Create")!.MakeGenericMethod(new Type[] { genericType });
+            var randomList = fakerCreateMethod.Invoke(context.Faker, null);
 
-            var list = Activator.CreateInstance(generic);
-            var addMethod = generic.GetMethod("Add");
-            addMethod!.Invoke(list, new object[] { result! });
+            var list = Activator.CreateInstance(genericList);
+            var listAddMethod = genericList.GetMethod("Add");
+            listAddMethod!.Invoke(list, new object[] { randomList! });
+
             return list!;
         }
 
