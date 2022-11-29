@@ -8,7 +8,7 @@ namespace Faker
 {
     internal class StringGenerator : IGenerator
     {
-        private const string validCharacters= "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕёЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        private const string validCharacters= "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         private const int maxStringLength = 16;
         private const int minStringLength = 4;
 
