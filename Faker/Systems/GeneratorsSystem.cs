@@ -1,4 +1,5 @@
-﻿namespace Faker
+﻿using Faker.Generators;
+namespace Faker
 {
     internal class GeneratorsSystem
     {

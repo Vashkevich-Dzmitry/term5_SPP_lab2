@@ -2,10 +2,8 @@
 {
     public interface IGenerator
     {
-        public interface IGenerator
-        {
-            object Generate();
-            Type GetType();
-        }
+        public object Generate();
+        public Type GetType();
+
     }
 }
