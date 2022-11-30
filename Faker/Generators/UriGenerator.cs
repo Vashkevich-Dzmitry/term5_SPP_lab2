@@ -3,7 +3,7 @@ using Faker.Interfaces;
 
 namespace Faker.Generators
 {
-    internal class UriGenerator : IGenerator
+    public class UriGenerator : IGenerator
     {
         private const int maxStringLength = 16;
         private const int minStringLength = 4;
@@ -157,5 +157,7 @@ namespace Faker.Generators
             }
             return new string(str);
         }
+
+
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Faker.Generators
 {
-    internal class LongGenerator : IGenerator
+    public class LongGenerator : IGenerator
     {
         public object Generate(Type type, IGeneratorContext context)
         {

@@ -2,7 +2,7 @@
 
 namespace Faker.Generators
 {
-    internal class BoolGenerator : IGenerator
+    public class BoolGenerator : IGenerator
     {
         public object Generate(Type type, IGeneratorContext context)
         {

@@ -2,7 +2,7 @@
 
 namespace Faker.Generators
 {
-    internal class StringGenerator : IGenerator
+    public class StringGenerator : IGenerator
     {
         private const int maxStringLength = 16;
         private const int minStringLength = 4;
