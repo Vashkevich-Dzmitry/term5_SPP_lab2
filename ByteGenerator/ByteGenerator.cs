@@ -1,13 +1,17 @@
 ﻿using Faker.Interfaces;
-internal class ByteGenerator : IGenerator
-{
-    public object Generate(Type type, IGeneratorContext context)
-    {
-        return new Random().Next(byte.MaxValue);
-    }
 
-    public bool CanGenerate(Type type)
+namespace ByteGeneratorPlugin
+{
+    public class ByteGenerator : IGenerator
     {
-        return type == typeof(byte);
+        public object Generate(Type type, IGeneratorContext context)
+        {
+            return (byte)new Random().Next(byte.MaxValue);
+        }
+
+        public bool CanGenerate(Type type)
+        {
+            return type == typeof(byte);
+        }
     }
 }
