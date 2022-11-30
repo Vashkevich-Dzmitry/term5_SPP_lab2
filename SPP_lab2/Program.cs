@@ -13,7 +13,7 @@
             Console.WriteLine(result.Name);
             Console.WriteLine(result.bar);
             Console.WriteLine(result.bar.flag);
-            Console.WriteLine(result.bar.foo);
+            Console.WriteLine(result.bar.foo == null);
         }
     }
 }
