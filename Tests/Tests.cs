@@ -9,7 +9,7 @@ namespace FackerUnitTests
         [TestMethod]
         public void FakerCanGenerateSimpleTypes()
         {
-            Faker.Faker faker = new Faker.Faker();
+            Faker.Faker faker = new();
             var foo = faker.Create<Foo>();
 
             Assert.IsTrue(foo.name != "");
@@ -20,7 +20,7 @@ namespace FackerUnitTests
         [TestMethod]
         public void FakerCanGenerateList()
         {
-            Faker.Faker faker = new Faker.Faker();
+            Faker.Faker faker = new();
             var foo = faker.Create<Foo>();
 
             Assert.IsTrue(foo.bar._list.Count > 0);
@@ -29,18 +29,32 @@ namespace FackerUnitTests
         }
 
         [TestMethod]
-        public void TestMethod3()
+        public void FakerCanGenerateObjectWithPrivateConstractor()
         {
+            Faker.Faker faker = new();
+            var foo = faker.Create<Foo>();
+
+            Assert.IsTrue(foo.bar != null);
         }
 
         [TestMethod]
-        public void TestMethod4()
+        public void FakerIgnoreCycles()
         {
+            Faker.Faker faker = new();
+            var foo = faker.Create<Foo>();
+
+
+            Assert.IsTrue(foo.bar != null);
+            Assert.IsTrue(foo.bar._foo == null);
         }
 
         [TestMethod]
-        public void TestMethod5()
+        public void FakerCanCreateUri()
         {
+            Faker.Faker faker = new();
+            var foo = faker.Create<Foo>();
+
+            Assert.IsTrue(foo.uri.ToString() != "");
         }
     }
 }
